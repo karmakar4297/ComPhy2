@@ -27,16 +27,13 @@ v2=100.0
 v=(v1+v2)/2
 target=0.01
 t=np.linspace(0,10,n)
- # r array with the intitial values for u1, u2 and u3   
-#x=np.array([0])
-#y=np.array([v])
 sol=bound(t,v1)
 b1=sol[n-1]
 sol=bound(t,v2)
 b2=sol[n-1]
-while(abs(b2-b1)>target):
-    v=(v1+v2)/2
-    sol=bound(t,v)
+while(abs(b2-b1)>target):  #Here we are doing a binary search manually. We do not need np.argmin() in this method.
+    v=(v1+v2)/2            #We could have used np.argmin() in case of a set of initial conditions, to find the proper solution
+    sol=bound(t,v)         # by finding the minimum of y(t) at t=t1
     b=sol[n-1]
     if(b1*b>0):
         v1=v
